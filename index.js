@@ -1,4 +1,10 @@
 // ⭐️ Example Challenge START ⭐️
+/*
+ * callback functions: functions that are passed into other functions as parameters
+ *      passed in 
+ * higher order functions: functions that take callback functions as parameters
+ *      receive
+*/
 
 /**
  * ### Challenge `processFirstItem`
@@ -8,6 +14,8 @@
  * It takes two arguments:
  * @param stringList an array of strings.
  * @param callback function that takes a string as its argument.
+ * callback functions: functions that are passed into other functions as parameters
+ * higher order functions: functions that take callback functions as parameters
  * @returns the result of invoking `callback` with the FIRST element in `stringList`.
  * 
  * Example of usage of this higher-order function:
@@ -27,10 +35,22 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
+ *      the variable counter1 is equal to the function counter() and will receive 
+ *        the count from counterMaker and return that count variable incremented by 1.
+ *      counter2 is a count variable located outside counter2 function is is just 
+ *        the data in the variable. 
+ * 
+ *      counter1 is a function
+ *      counter2 is holding data
  * 
  * 2. Which of the two uses a closure? How can you tell?
+ *        counterMaker aka counter1 uses a closure. 
+ *    You can tell because there is no global variables and it's referencing and returning a
+ *      variable within counterMaker that it wouldn't normally have access to
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ *      counter1 would be preferable if you wanted multiple counters
+ *      counter2 would be better if you needed to reference count outside the function
  *
 */
 
