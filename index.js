@@ -140,8 +140,28 @@ and returns the score at each point in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(callBackFunction, numberInnings) {
+  let homeScore = 0;
+  let awayScore = 0; 
+  let inning = 1;
+
+  for(let i = 0; i < numberInnings; i++){
+    homeScore += callBackFunction();
+    awayScore += callBackFunction();
+    if(inning === 1){
+      console.log(`${inning}st inning: ${homeScore} - ${awayScore}`);
+    }else if(inning === 2) {
+      console.log(`${inning}nd inning: ${homeScore} - ${awayScore}`);
+    }else if(inning === 3){
+      console.log(`${inning}rd inning: ${homeScore} - ${awayScore}`);
+    }else{
+      console.log(`${inning}th inning: ${homeScore} - ${awayScore}`);
+    }
+    inning++;
+  }
+  console.log("\n");
+  console.log(`Final Score: ${homeScore} - ${awayScore}`);
 }
 
 
+// scoreboard(inning, 9);
