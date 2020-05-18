@@ -22,9 +22,9 @@
  * Invoking `processFirstItem` passing `['foo', 'bar']` and `(str) => str + str`,
  * should return 'foofoo'.
 */
-function processFirstItem(stringList, callback) {
-  return callback(stringList[0])
-}
+// function processFirstItem(stringList, callback) {
+//   return callback(stringList[0])
+// }
 
 // ⭐️ Example Challenge END ⭐️
 
@@ -74,17 +74,21 @@ function counter2() {
 
 /* Task 2: inning() 
 
-Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
+Write a function called `inning` that generates a random number of points that a team scored in an inning.
+This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
-    /*Code Here*/
+    return Math.round(Math.random() * 2); 
 
 }
 
+// console.log(inning());
+
 /* Task 3: finalScore()
 
-Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and and returns the final score of the game in the form of an object.
+Write a higher order function called `finalScore` that accepts the callback function `inning` 
+(from above) and a number of innings and and returns the final score of the game in the form of an object.
 
 For example, 
 
@@ -96,11 +100,24 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(cb, numInnings){
 
-  /*Code Here*/
+  let homeScore = 0;
+  let awayScore = 0; 
+
+  for(let i = 0; i < numInnings; i++){
+    homeScore += cb();
+    awayScore += cb();
+  }
+
+  return {
+    "Home" : `${homeScore}`,
+    "Away" : `${awayScore}`,
+  }
 
 }
+
+// console.log(finalScore(inning, 9));
 
 /* Task 4: 
 
@@ -109,7 +126,7 @@ Create a function called `scoreboard` that accepts the following parameters:
 (1) Callback function `inning` that you wrote above
 (2) A number of innings
 
-and returns the score at each pont in the game, like so:
+and returns the score at each point in the game, like so:
 
 1st inning: 0 - 2
 2nd inning: 1 - 3
