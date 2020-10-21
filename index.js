@@ -1,4 +1,10 @@
 // ⭐️ Example Challenge START ⭐️
+/*
+ * callback functions: functions that are passed into other functions as parameters
+ *      passed in 
+ * higher order functions: functions that take callback functions as parameters
+ *      receive
+*/
 
 /**
  * ### Challenge `processFirstItem`
@@ -8,15 +14,17 @@
  * It takes two arguments:
  * @param stringList an array of strings.
  * @param callback function that takes a string as its argument.
+ * callback functions: functions that are passed into other functions as parameters
+ * higher order functions: functions that take callback functions as parameters
  * @returns the result of invoking `callback` with the FIRST element in `stringList`.
  * 
  * Example of usage of this higher-order function:
  * Invoking `processFirstItem` passing `['foo', 'bar']` and `(str) => str + str`,
  * should return 'foofoo'.
 */
-function processFirstItem(stringList, callback) {
-  return callback(stringList[0])
-}
+// function processFirstItem(stringList, callback) {
+//   return callback(stringList[0])
+// }
 
 // ⭐️ Example Challenge END ⭐️
 
@@ -27,10 +35,22 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
+ *      the variable counter1 is equal to the function counter() and will receive 
+ *        the count from counterMaker and return that count variable incremented by 1.
+ *      counter2 is a count variable located outside counter2 function is is just 
+ *        the data in the variable. 
+ * 
+ *      counter1 is a function
+ *      counter2 is holding data
  * 
  * 2. Which of the two uses a closure? How can you tell?
+ *        counterMaker aka counter1 uses a closure. 
+ *    You can tell because there is no global variables and it's referencing and returning a
+ *      variable within counterMaker that it wouldn't normally have access to
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ *      counter1 would be preferable if you wanted multiple counters
+ *      counter2 would be better if you needed to reference count outside the function
  *
 */
 
@@ -54,17 +74,21 @@ function counter2() {
 
 /* Task 2: inning() 
 
-Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
+Write a function called `inning` that generates a random number of points that a team scored in an inning.
+This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
-    /*Code Here*/
+    return Math.round(Math.random() * 2); 
 
 }
 
+// console.log(inning());
+
 /* Task 3: finalScore()
 
-Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and and returns the final score of the game in the form of an object.
+Write a higher order function called `finalScore` that accepts the callback function `inning` 
+(from above) and a number of innings and and returns the final score of the game in the form of an object.
 
 For example, 
 
@@ -76,11 +100,24 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(cb, numInnings){
 
-  /*Code Here*/
+  let homeScore = 0;
+  let awayScore = 0; 
+
+  for(let i = 0; i < numInnings; i++){
+    homeScore += cb();
+    awayScore += cb();
+  }
+
+  return {
+    "Home" : `${homeScore}`,
+    "Away" : `${awayScore}`,
+  }
 
 }
+
+// console.log(finalScore(inning, 9));
 
 /* Task 4: 
 
@@ -89,7 +126,7 @@ Create a function called `scoreboard` that accepts the following parameters:
 (1) Callback function `inning` that you wrote above
 (2) A number of innings
 
-and returns the score at each pont in the game, like so:
+and returns the score at each point in the game, like so:
 
 1st inning: 0 - 2
 2nd inning: 1 - 3
@@ -103,8 +140,28 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(callBackFunction, numberInnings) {
+  let homeScore = 0;
+  let awayScore = 0; 
+  let inning = 1;
+
+  for(let i = 0; i < numberInnings; i++){
+    homeScore += callBackFunction();
+    awayScore += callBackFunction();
+    if(inning === 1){
+      console.log(`${inning}st inning: ${homeScore} - ${awayScore}`);
+    }else if(inning === 2) {
+      console.log(`${inning}nd inning: ${homeScore} - ${awayScore}`);
+    }else if(inning === 3){
+      console.log(`${inning}rd inning: ${homeScore} - ${awayScore}`);
+    }else{
+      console.log(`${inning}th inning: ${homeScore} - ${awayScore}`);
+    }
+    inning++;
+  }
+  console.log("\n");
+  console.log(`Final Score: ${homeScore} - ${awayScore}`);
 }
 
 
+// scoreboard(inning, 9);
